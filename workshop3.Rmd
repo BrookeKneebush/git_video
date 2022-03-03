@@ -1,5 +1,5 @@
 ---
-title: "Workshop3 - RMarkdown"
+title: "Workshop4 - RMarkdown"
 author: "Brooke Sargeant"
 date: '2022-03-01'
 output: html_document
@@ -22,3 +22,34 @@ data<-read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/ma
 data%>%head()
 
 ```
+
+```{r}
+survey<-read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-05-18/survey.csv')
+
+country<-survey %>%
+  distinct(country)
+
+survey%>%count(country, sort=TRUE)
+
+survey_short<-survey%>%
+  filter(
+    country=="United States" |
+      country=="USA" |
+      country=="US" |
+      country=="U.S." |
+      country=="United States of America" |
+      country=="Usa"
+  )
+
+survey_short%>%filter(
+  annual_salary>50000 & gender=="Woman"
+)
+survey_short%>%
+  select(how_old_are_you, annual_salary, industry, gender)%>%
+  filter(gender=="Woman")%>%
+  count(industry, sort=TRUE)
+  
+  
+```
+
+
